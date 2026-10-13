@@ -1,0 +1,2609 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rain Water Gutter</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #081521;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 70px;
+
+            background: rgba(31, 43, 56, 0.96);
+            backdrop-filter: blur(10px);
+
+            z-index: 5000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            width: 170px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .nav-links > a,
+        .dropbtn {
+            color: #ffffff;
+            font-size: 17px;
+            font-weight: 500;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links > a:hover,
+        .dropbtn:hover {
+            color: #74d3ff;
+        }
+
+
+        /* =====================================================
+           DROPDOWN
+        ===================================================== */
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 0;
+
+            width: 190px;
+
+            background: #243241;
+            border-radius: 10px;
+
+            padding: 8px 0;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+
+            transition: 0.25s ease;
+
+            z-index: 6000;
+        }
+
+        .dropdown-content a {
+            display: block;
+
+            padding: 11px 18px;
+
+            color: #ffffff;
+            font-size: 15px;
+            white-space: nowrap;
+
+            transition: 0.25s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: #32475f;
+            color: #74d3ff;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           HAMBURGER
+        ===================================================== */
+
+        .menu-toggle {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border: none;
+            background: transparent;
+
+            cursor: pointer;
+
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            gap: 5px;
+
+            z-index: 7000;
+        }
+
+        .menu-toggle span {
+            display: block;
+
+            width: 26px;
+            height: 3px;
+
+            background: #ffffff;
+            border-radius: 5px;
+
+            transition: 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .container {
+            width: 100%;
+            max-width: 1800px;
+
+            margin: 0 auto;
+
+            padding: 140px 60px 70px;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            width: 100%;
+
+            display: grid;
+            grid-template-columns: 42% 58%;
+
+            align-items: center;
+
+            gap: 50px;
+
+            margin-bottom: 100px;
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            color: #2f8fff;
+
+            font-size: clamp(38px, 4vw, 58px);
+
+            font-weight: 500;
+
+            line-height: 1.08;
+
+            text-transform: uppercase;
+
+            margin-bottom: 28px;
+        }
+
+        .hero-content p {
+            max-width: 550px;
+
+            color: #b7c3d3;
+
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .hero-image {
+            width: 100%;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 520px;
+
+            object-fit: cover;
+
+            border-radius: 22px;
+        }
+
+
+        /* =====================================================
+           FEATURE
+        ===================================================== */
+
+        .feature-section {
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns: 1.1fr 0.9fr;
+
+            align-items: center;
+
+            gap: 60px;
+
+            margin: 100px 0;
+        }
+
+        .feature-image {
+            width: 100%;
+
+            overflow: hidden;
+
+            border-radius: 18px;
+
+            border: 1px solid rgba(47, 143, 255, 0.2);
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: 500px;
+
+            object-fit: cover;
+
+            transition: transform 0.5s ease;
+        }
+
+        .feature-image:hover img {
+            transform: scale(1.04);
+        }
+
+        .feature-content {
+            width: 100%;
+        }
+
+        .feature-content h2 {
+            color: #2f8fff;
+
+            font-size: clamp(24px, 2.2vw, 32px);
+
+            line-height: 1.3;
+
+            font-weight: 700;
+
+            margin-bottom: 22px;
+
+            text-transform: uppercase;
+        }
+
+        .feature-content p {
+            color: #b9c4cf;
+
+            font-size: 15px;
+
+            line-height: 2;
+
+            margin: 0;
+        }
+
+
+        /* =====================================================
+           SECTION TITLE
+        ===================================================== */
+
+        .section-title {
+            width: 100%;
+            margin-bottom: 22px;
+        }
+
+        .section-title h2 {
+            color: #2f8fff;
+
+            font-size: 28px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =====================================================
+           9 GUTTER PATHY IMAGE - OPTIMIZED
+        ===================================================== */
+
+        .pathy-gallery {
+            width: 100%;
+            margin-bottom: 70px;
+        }
+
+        .pathy-image {
+            width: 20%;
+
+            overflow: hidden;
+
+            border-radius: 18px;
+
+            border: 1px solid rgba(47, 143, 255, 0.25);
+
+            background: #081521;
+
+            /* Prevent layout jump */
+            aspect-ratio: 16 / 7;
+        }
+
+        .pathy-image img {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+
+            /* Keeps complete image visible */
+            object-fit: contain;
+
+            object-position: center;
+
+            /* Smooth rendering */
+            image-rendering: auto;
+
+            /* Avoid unnecessary huge image rendering */
+            max-width: 100%;
+            max-height: 100%;
+
+            /* Prevent selection dragging */
+            user-select: none;
+        }
+
+
+        /* =====================================================
+           FITTINGS GALLERY
+        ===================================================== */
+
+        .fittings-section {
+            position: relative;
+
+            width: 100%;
+
+            margin-top: 20px;
+        }
+
+        .gallery-wrapper {
+            position: relative;
+
+            width: 100%;
+        }
+
+        .gallery-container {
+            width: 100%;
+
+            display: flex;
+
+            gap: 20px;
+
+            overflow-x: auto;
+            overflow-y: hidden;
+
+            scroll-behavior: smooth;
+
+            scrollbar-width: none;
+
+            padding: 10px 5px 30px;
+
+            cursor: grab;
+
+            user-select: none;
+        }
+
+        .gallery-container:active {
+            cursor: grabbing;
+        }
+
+        .gallery-container::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        /* =====================================================
+           PRODUCT CARD
+        ===================================================== */
+
+        .gallery-product {
+            flex: 0 0 260px;
+
+            width: 260px;
+
+            text-align: center;
+        }
+
+        .gallery-item {
+            width: 100%;
+            height: 330px;
+
+            padding: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #081521;
+
+            border: 1px solid rgba(47, 143, 255, .35);
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            transition: 0.35s ease;
+        }
+
+        .gallery-item:hover {
+            background: #10253b;
+
+            border-color: #66b3ff;
+
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 12px 30px rgba(47, 143, 255, 0.30);
+        }
+
+        .gallery-item img {
+            width: 80%;
+            height: 275px;
+
+            object-fit: contain;
+
+            transition: transform 0.35s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .gallery-product p {
+            width: 100%;
+
+            margin-top: 14px;
+
+            color: #ffffff;
+
+            font-size: 14px;
+
+            font-weight: 400;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           SCROLL BUTTONS
+        ===================================================== */
+
+        .scroll-btn {
+            position: absolute;
+
+            top: -65px;
+
+            width: 45px;
+            height: 45px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+
+            color: #111111;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+            transition: 0.3s ease;
+
+            z-index: 100;
+        }
+
+        .scroll-btn:hover {
+            background: #2f8fff;
+            color: #ffffff;
+        }
+
+        .scroll-btn.left {
+            right: 58px;
+        }
+
+        .scroll-btn.right {
+            right: 5px;
+        }
+
+
+        /* =====================================================
+           CONTACT
+        ===================================================== */
+
+        .contact-section {
+            width: 100%;
+
+            background: #1f2b38;
+
+            padding: 100px 7%;
+
+            margin-top: 50px;
+        }
+
+        .contact-container {
+            width: 100%;
+            max-width: 1500px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 80px;
+
+            align-items: center;
+        }
+
+        .contact-left {
+            width: 100%;
+        }
+
+        .contact-left h5 {
+            color: #2b7cff;
+
+            font-size: 17px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 15px;
+        }
+
+        .contact-left h2 {
+            color: #ffffff;
+
+            font-size: clamp(30px, 3vw, 46px);
+
+            line-height: 1.25;
+
+            margin-bottom: 22px;
+        }
+
+        .contact-left > p {
+            max-width: 650px;
+
+            color: #ffffff;
+
+            font-size: 17px;
+
+            line-height: 1.8;
+
+            margin-bottom: 35px;
+        }
+
+        .contact-info {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 22px;
+        }
+
+        .info-box {
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+        }
+
+        .info-box img {
+            width: 55px;
+            height: 55px;
+
+            padding: 12px;
+
+            flex-shrink: 0;
+
+            background: #2b7cff;
+
+            border-radius: 50%;
+
+            object-fit: contain;
+        }
+
+        .info-box h4 {
+            color: #ffffff;
+
+            font-size: 19px;
+
+            margin-bottom: 2px;
+        }
+
+        .info-box p {
+            color: #d8d8d8;
+
+            font-size: 15px;
+
+            margin: 0;
+        }
+
+
+        /* =====================================================
+           CONTACT FORM
+        ===================================================== */
+
+        .contact-right {
+            width: 100%;
+
+            padding: 40px;
+
+            background: #1d2e40;
+
+            border: 1px solid #1565d8;
+
+            border-radius: 18px;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-right form {
+            width: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 17px;
+        }
+
+        .contact-right input,
+        .contact-right textarea {
+            width: 100%;
+
+            padding: 16px;
+
+            color: #ffffff;
+
+            background: #1f2b38;
+
+            border: 1px solid #1e4063;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            resize: vertical;
+
+            transition: 0.3s ease;
+        }
+
+        .contact-right input::placeholder,
+        .contact-right textarea::placeholder {
+            color: #9faab5;
+        }
+
+        .contact-right input:focus,
+        .contact-right textarea:focus {
+            border-color: #2b7cff;
+
+            box-shadow: 0 0 0 2px rgba(43, 124, 255, 0.12);
+        }
+
+        .contact-right textarea {
+            min-height: 150px;
+        }
+
+        .contact-right button {
+            width: 100%;
+
+            padding: 16px;
+
+            background: #0d316b;
+
+            color: #ffffff;
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-family: inherit;
+
+            font-size: 17px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .contact-right button:hover {
+            background: #1565d8;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           LARGE DESKTOP
+        ===================================================== */
+
+        @media (min-width: 1600px) {
+
+            .header {
+                padding: 0 90px;
+            }
+
+            .logo-img {
+                width: 185px;
+            }
+
+            .nav-links {
+                gap: 42px;
+            }
+
+            .container {
+                max-width: 1850px;
+
+                padding-left: 70px;
+                padding-right: 70px;
+            }
+
+            .hero {
+                gap: 70px;
+            }
+
+            .hero-image img {
+                height: 550px;
+            }
+
+            .feature-section {
+                gap: 75px;
+            }
+
+            .feature-image img {
+                height: 530px;
+            }
+
+            .gallery-product {
+                flex-basis: 250px;
+                width: 250px;
+            }
+
+            .gallery-item {
+                height: 350px;
+            }
+
+            .gallery-item img {
+                height: 295px;
+            }
+
+            .contact-container {
+                max-width: 1600px;
+            }
+        }
+
+
+        /* =====================================================
+           LAPTOP
+        ===================================================== */
+
+        @media (max-width: 1599px) {
+
+            .container {
+                padding-left: 45px;
+                padding-right: 45px;
+            }
+
+            .hero-image img {
+                height: 395px;
+                width:714px;
+            }
+
+            .feature-image img {
+                height: 430px;
+            }
+
+            .gallery-product {
+                flex-basis: 240px;
+                width: 240px;
+            }
+
+            .gallery-item {
+                height: 310px;
+            }
+
+            .gallery-item img {
+                height: 255px;
+            }
+        }
+
+
+        /* =====================================================
+           TABLET LANDSCAPE
+        ===================================================== */
+
+        @media (max-width: 1199px) {
+
+            .header {
+                padding: 0 40px;
+            }
+
+            .logo-img {
+                width: 150px;
+            }
+
+            .nav-links {
+                gap: 25px;
+            }
+
+            .nav-links > a,
+            .dropbtn {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 125px 35px 60px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr 1fr;
+
+                gap: 30px;
+
+                margin-bottom: 80px;
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .hero-image img {
+                height: 400px;
+            }
+
+            .feature-section {
+                gap: 35px;
+
+                margin: 80px 0;
+            }
+
+            .feature-image img {
+                height: 380px;
+            }
+
+            .contact-section {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 991px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+
+                gap: 35px;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .hero-image img {
+                height: 400px;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .feature-section {
+                grid-template-columns: 1fr;
+
+                gap: 35px;
+            }
+
+            .feature-image img {
+                height: 420px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+
+                gap: 50px;
+            }
+
+            .contact-left {
+                text-align: center;
+            }
+
+            .contact-left > p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .contact-info {
+                align-items: center;
+            }
+
+            .info-box {
+                width: 350px;
+                max-width: 100%;
+                text-align: left;
+            }
+
+            /* PATHY */
+
+            .pathy-image {
+                aspect-ratio: 16 / 8;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 767px) {
+
+            .header {
+                height: 65px;
+
+                padding: 0 15px;
+
+                flex-direction: row;
+            }
+
+            .logo-img {
+                width: 110px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .header-right {
+                position: absolute;
+
+                top: 65px;
+                left: 0;
+
+                width: 100%;
+
+                display: none;
+
+                padding: 12px 20px 20px;
+
+                background: rgba(31, 43, 56, 0.98);
+
+                backdrop-filter: blur(12px);
+
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            }
+
+            .header-right.active {
+                display: block;
+            }
+
+            .nav {
+                width: 100%;
+            }
+
+            .nav-links {
+                width: 100%;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 0;
+            }
+
+            .nav-links > a,
+            .dropbtn {
+                display: block;
+
+                width: 100%;
+
+                padding: 13px 10px;
+
+                text-align: center;
+
+                font-size: 15px;
+            }
+
+
+            /* MOBILE DROPDOWN */
+
+            .dropdown {
+                width: 100%;
+                text-align: center;
+            }
+
+            .dropdown-content {
+                position: static;
+
+                width: 100%;
+                min-width: 100%;
+
+                padding: 4px 0;
+
+                background: #243241;
+
+                border-radius: 8px;
+
+                box-shadow: none;
+
+                opacity: 1;
+                visibility: visible;
+
+                transform: none;
+
+                display: none;
+            }
+
+            .dropdown.open .dropdown-content {
+                display: block;
+            }
+
+            .dropdown-content a {
+                width: 100%;
+
+                padding: 10px;
+
+                text-align: center;
+
+                font-size: 14px;
+            }
+
+
+            /* MAIN */
+
+            .container {
+                width: 100%;
+
+                padding: 95px 18px 40px;
+            }
+
+
+            /* HERO */
+
+            .hero {
+                display: flex;
+
+                flex-direction: column;
+
+                gap: 25px;
+
+                margin-bottom: 65px;
+            }
+
+            .hero-image {
+                width: 100%;
+
+                order: -1;
+            }
+
+            .hero-image img {
+                width: 100%;
+
+                height: auto;
+
+                aspect-ratio: 16 / 9;
+
+                object-fit: cover;
+
+                border-radius: 15px;
+            }
+
+            .hero-content {
+                width: 100%;
+
+                text-align: left;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(27px, 7vw, 38px);
+
+                line-height: 1.18;
+
+                margin-bottom: 18px;
+            }
+
+            .hero-content p {
+                width: 100%;
+
+                font-size: 15px;
+
+                line-height: 1.7;
+            }
+
+
+            /* FEATURE */
+
+            .feature-section {
+                width: 100%;
+
+                display: flex;
+
+                flex-direction: column;
+
+                gap: 25px;
+
+                margin: 60px 0;
+            }
+
+            .feature-image {
+                width: 100%;
+            }
+
+            .feature-image img {
+                width: 100%;
+
+                height: auto;
+
+                aspect-ratio: 16 / 10;
+
+                object-fit: cover;
+
+                border-radius: 15px;
+            }
+
+            .feature-content {
+                width: 100%;
+
+                padding: 0;
+            }
+
+            .feature-content h2 {
+                font-size: 23px;
+
+                line-height: 1.35;
+
+                margin-bottom: 17px;
+            }
+
+            .feature-content p {
+                font-size: 14px;
+
+                line-height: 1.8;
+            }
+
+
+            /* TITLES */
+
+            .section-title {
+                margin-bottom: 18px;
+            }
+
+            .section-title h2 {
+                font-size: 23px;
+            }
+
+
+            /* =================================================
+               PATHY - MOBILE OPTIMIZED
+            ================================================= */
+
+            .pathy-gallery {
+                width: 42%;
+                margin-bottom: 55px;
+            }
+
+            .pathy-image {
+                width: 100%;
+
+                aspect-ratio: 16 / 9;
+
+                border-radius: 12px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                overflow: hidden;
+            }
+
+            .pathy-image img {
+                width: 100%;
+                height: 100%;
+
+                object-fit: contain;
+
+                object-position: center;
+            }
+
+
+            /* FITTINGS */
+
+            .fittings-section {
+                width: 100%;
+            }
+
+            .gallery-container {
+                width: 100%;
+
+                gap: 14px;
+
+                padding: 8px 4px 25px;
+            }
+
+            .gallery-product {
+                flex: 0 0 190px;
+
+                width: 190px;
+            }
+
+            .gallery-item {
+                width: 190px;
+
+                height: 225px;
+
+                padding: 12px;
+
+                border-radius: 13px;
+            }
+
+            .gallery-item img {
+                width: 78%;
+
+                height: 190px;
+            }
+
+            .gallery-product p {
+                font-size: 13px;
+
+                margin-top: 11px;
+
+                line-height: 1.45;
+            }
+
+
+            /* SCROLL BUTTONS */
+
+            .scroll-btn {
+                top: -55px;
+
+                width: 38px;
+                height: 38px;
+
+                font-size: 15px;
+            }
+
+            .scroll-btn.left {
+                right: 48px;
+            }
+
+            .scroll-btn.right {
+                right: 3px;
+            }
+
+
+            /* CONTACT */
+
+            .contact-section {
+                width: 100%;
+
+                padding: 65px 18px;
+
+                margin-top: 40px;
+            }
+
+            .contact-container {
+                width: 100%;
+
+                display: flex;
+
+                flex-direction: column;
+
+                gap: 40px;
+            }
+
+            .contact-left {
+                width: 100%;
+
+                text-align: left;
+            }
+
+            .contact-left h5 {
+                font-size: 15px;
+
+                letter-spacing: 1.5px;
+            }
+
+            .contact-left h2 {
+                font-size: clamp(27px, 7vw, 34px);
+
+                line-height: 1.3;
+            }
+
+            .contact-left > p {
+                font-size: 14px;
+
+                line-height: 1.75;
+            }
+
+            .contact-info {
+                width: 100%;
+
+                align-items: stretch;
+            }
+
+            .info-box {
+                width: 100%;
+
+                gap: 14px;
+            }
+
+            .info-box img {
+                width: 48px;
+                height: 48px;
+
+                padding: 10px;
+            }
+
+            .info-box h4 {
+                font-size: 17px;
+            }
+
+            .info-box p {
+                font-size: 13px;
+
+                overflow-wrap: anywhere;
+            }
+
+
+            /* FORM */
+
+            .contact-right {
+                width: 100%;
+
+                padding: 20px;
+
+                border-radius: 14px;
+            }
+
+            .contact-right input,
+            .contact-right textarea {
+                width: 100%;
+
+                padding: 14px;
+
+                font-size: 14px;
+            }
+
+            .contact-right textarea {
+                min-height: 130px;
+            }
+
+            .contact-right button {
+                padding: 14px;
+
+                font-size: 16px;
+            }
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 576px) {
+
+            .header {
+                height: 60px;
+
+                padding: 0 12px;
+            }
+
+            .header-right {
+                top: 60px;
+            }
+
+            .logo-img {
+                width: 95px;
+            }
+
+            .menu-toggle {
+                width: 40px;
+                height: 40px;
+            }
+
+            .menu-toggle span {
+                width: 24px;
+                height: 3px;
+            }
+
+            .container {
+                padding: 88px 12px 35px;
+            }
+
+            .hero-image img {
+                aspect-ratio: 16 / 10;
+            }
+
+            .hero-content h1 {
+                font-size: 27px;
+            }
+
+            .hero-content p {
+                font-size: 14px;
+            }
+
+            .feature-section {
+                margin: 50px 0;
+            }
+
+            .feature-image img {
+                aspect-ratio: 16 / 10;
+            }
+
+            .feature-content h2 {
+                font-size: 21px;
+            }
+
+            .feature-content p {
+                font-size: 13.5px;
+            }
+
+            .section-title h2 {
+                font-size: 21px;
+            }
+
+            /* PATHY */
+
+            .pathy-image {
+                aspect-ratio: 16 / 9;
+                border-radius: 10px;
+            }
+
+            .gallery-product {
+                flex: 0 0 175px;
+
+                width: 175px;
+            }
+
+            .gallery-item {
+                width: 175px;
+
+                height: 210px;
+            }
+
+            .gallery-item img {
+                height: 175px;
+            }
+
+            .gallery-product p {
+                font-size: 12.5px;
+            }
+
+            .contact-section {
+                padding: 55px 12px;
+            }
+
+            .contact-right {
+                padding: 17px;
+            }
+        }
+
+
+        /* =====================================================
+           EXTRA SMALL
+        ===================================================== */
+
+        @media (max-width: 430px) {
+
+            .header {
+                height: 58px;
+
+                padding: 0 10px;
+            }
+
+            .header-right {
+                top: 58px;
+            }
+
+            .logo-img {
+                width: 88px;
+            }
+
+            .container {
+                padding: 82px 10px 30px;
+            }
+
+            .hero {
+                gap: 20px;
+            }
+
+            .hero-image img {
+                aspect-ratio: 16 / 10;
+
+                border-radius: 12px;
+            }
+
+            .hero-content h1 {
+                font-size: 24px;
+
+                line-height: 1.2;
+            }
+
+            .hero-content p {
+                font-size: 13.5px;
+            }
+
+            .feature-image img {
+                aspect-ratio: 16 / 10;
+            }
+
+            .feature-content h2 {
+                font-size: 20px;
+            }
+
+            .feature-content p {
+                font-size: 13px;
+
+                line-height: 1.75;
+            }
+
+            .section-title h2 {
+                font-size: 20px;
+            }
+
+            /* PATHY */
+
+            .pathy-image {
+                aspect-ratio: 16 / 9;
+
+                border-radius: 9px;
+            }
+
+            .gallery-product {
+                flex: 0 0 165px;
+
+                width: 165px;
+            }
+
+            .gallery-item {
+                width: 155px;
+
+                height: 195px;
+            }
+
+            .gallery-item img {
+                height: 160px;
+            }
+
+            .gallery-product p {
+                font-size: 12px;
+            }
+
+            .scroll-btn {
+                width: 35px;
+                height: 35px;
+
+                font-size: 13px;
+
+                top: -50px;
+            }
+
+            .scroll-btn.left {
+                right: 43px;
+            }
+
+            .contact-section {
+                padding: 48px 10px;
+            }
+
+            .contact-left h2 {
+                font-size: 25px;
+            }
+
+            .contact-right {
+                padding: 15px;
+            }
+        }
+
+
+        /* =====================================================
+           VERY SMALL
+        ===================================================== */
+
+        @media (max-width: 375px) {
+
+            .logo-img {
+                width: 82px;
+            }
+
+            .container {
+                padding-left: 9px;
+                padding-right: 9px;
+            }
+
+            .hero-content h1 {
+                font-size: 22px;
+            }
+
+            .hero-content p {
+                font-size: 13px;
+            }
+
+            .feature-content h2 {
+                font-size: 19px;
+            }
+
+            .feature-content p {
+                font-size: 12.5px;
+            }
+
+            .gallery-product {
+                flex: 0 0 155px;
+
+                width: 155px;
+            }
+
+            .gallery-item {
+                width: 155px;
+
+                height: 185px;
+            }
+
+            .gallery-item img {
+                height: 150px;
+            }
+
+            .gallery-product p {
+                font-size: 11.5px;
+            }
+
+            .info-box {
+                gap: 11px;
+            }
+
+            .info-box img {
+                width: 44px;
+                height: 44px;
+            }
+
+            .info-box h4 {
+                font-size: 16px;
+            }
+
+            .info-box p {
+                font-size: 12px;
+            }
+        }
+
+
+        /* =====================================================
+           320px
+        ===================================================== */
+
+        @media (max-width: 320px) {
+
+            .header {
+                padding: 0 7px;
+            }
+
+            .logo-img {
+                width: 75px;
+            }
+
+            .menu-toggle {
+                width: 36px;
+                height: 36px;
+            }
+
+            .menu-toggle span {
+                width: 22px;
+            }
+
+            .container {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            .hero-content h1 {
+                font-size: 20px;
+            }
+
+            .gallery-product {
+                flex-basis: 145px;
+
+                width: 145px;
+            }
+
+            .gallery-item {
+                width: 145px;
+
+                height: 175px;
+            }
+
+            .gallery-item img {
+                height: 140px;
+            }
+
+            /* PATHY */
+
+            .pathy-image {
+                aspect-ratio: 16 / 9;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="header">
+
+        <div class="header-left">
+
+            <a href="./index.html">
+
+                <img
+                    src="./images/Picsart_26-07-21_16-54-11-199.png"
+                    alt="Star Supreme Logo"
+                    class="logo-img">
+
+            </a>
+
+        </div>
+
+
+        <!-- Hamburger -->
+
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Open Menu"
+            aria-expanded="false">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+
+        <!-- Navigation -->
+
+        <div class="header-right" id="mobileMenu">
+
+            <nav class="nav">
+
+                <div class="nav-links">
+
+                    <a href="./index.html">Home</a>
+
+                    <a href="./about.html">About</a>
+
+                    <a href="./gallery.html">Gallery</a>
+
+
+                    <!-- Products -->
+
+                    <div class="dropdown" id="productDropdown">
+
+                        <a
+                            href="javascript:void(0)"
+                            class="dropbtn"
+                            id="productButton">
+
+                            Products
+
+                        </a>
+
+                        <div class="dropdown-content">
+
+                            <a href="6 gutter.html">
+                                6 Gutter
+                            </a>
+
+                            <a href="9 gutter.html">
+                                9 Gutter
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <a href="./contact.html">
+                        Contact
+                    </a>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="container">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <h1>
+                    RAIN WATER GUTTER<br>
+                    DURABLE RELIABLE<br>
+                    BUILT FOR EVERY SEASON.
+                </h1>
+
+                <p>
+                    Designed to collect and channel rainwater efficiently,
+                    protecting your home and foundation.
+                </p>
+
+            </div>
+
+
+            <div class="hero-image">
+
+                <img
+                    src="./images/gutter-image4.jpeg"
+                    alt="9 inch Rain Water Gutter"
+                    class="pathy-img"
+                    loading="eager"
+                    decoding="async">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FEATURE -->
+
+        <section class="feature-section">
+
+            <div class="feature-image">
+
+                <img
+                    src="./images/gutter-image3.jpg"
+                    alt="9 inch Square uPVC Rain Water Gutter"
+                    loading="lazy"
+                    decoding="async">
+
+            </div>
+
+
+            <div class="feature-content">
+
+                <h2>
+                    9” Square uPVC Rain Water Gutter
+                </h2>
+
+                <p>
+                    Our wide 9” specially designed rain water gutter system
+                    provides effective management of collecting large amounts
+                    of rain water from roofs. Its square profile provides ample
+                    capacity, suitable for homes or buildings with expansive
+                    roof areas or areas prone to heavy rainfall. Made from
+                    durable materials, these gutters offer long-lasting
+                    performance and resistance to weathering. Their wider width
+                    ensures efficient water flow, minimizing overflow and
+                    potential water damage to the structure's foundation.
+                    Ideal for both residential and commercial applications,
+                    these square rainwater gutters combine functionality with
+                    durability to provide reliable rainwater management in
+                    various weather conditions.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             GUTTER PATHY
+        ================================================== -->
+
+        <section class="pathy-gallery">
+
+            <div class="section-title">
+
+                <h2>
+                    9 Gutter Pathy
+                </h2>
+
+            </div>
+
+
+            <div class="pathy-image">
+
+                <img
+                    src="./images/9-gutter-pathy.png"
+                    alt="9 inch Gutter Fittings"
+                    loading="lazy"
+                    decoding="async">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FITTINGS
+        ================================================== -->
+
+        <section class="fittings-section">
+
+            <div class="section-title">
+
+                <h2>
+                    Gutter Fittings
+                </h2>
+
+            </div>
+
+
+            <div class="gallery-wrapper">
+
+
+                <!-- LEFT -->
+
+                <button
+                    class="scroll-btn left"
+                    id="galleryLeft"
+                    aria-label="Previous products">
+
+                    &#10094;
+
+                </button>
+
+
+                <!-- GALLERY -->
+
+                <div
+                    class="gallery-container"
+                    id="gallery">
+
+
+                    <div class="gallery-product">
+
+                        <div class="gallery-item">
+
+                            <img
+                                src="./images/uPvc Bracket-9.png"
+                                alt="uPVC Bracket"
+                                loading="lazy"
+                                decoding="async">
+
+                        </div>
+
+                        <p>
+                            uPVC Bracket
+                        </p>
+
+                    </div>
+
+
+                    <div class="gallery-product">
+
+                        <div class="gallery-item">
+
+                            <img
+                                src="./images/uPvc Bracket with GI Extension-9.png"
+                                alt="uPVC Bracket with GI Extension"
+                                loading="lazy"
+                                decoding="async">
+
+                        </div>
+
+                        <p>
+                            uPVC Bracket with GI Extension
+                        </p>
+
+                    </div>
+
+
+                    <div class="gallery-product">
+
+                        <div class="gallery-item">
+
+                            <img
+                                src="./images/Middle Drop-9.png"
+                                alt="Middle Drop"
+                                loading="lazy"
+                                decoding="async">
+
+                        </div>
+
+                        <p>
+                            Middle Drop
+                        </p>
+
+                    </div>
+
+
+                    <div class="gallery-product">
+
+                        <div class="gallery-item">
+
+                            <img
+                                src="./images/Gutter Joint-9.png"
+                                alt="Gutter Joint"
+                                loading="lazy"
+                                decoding="async">
+
+                        </div>
+
+                        <p>
+                            Gutter Joint
+                        </p>
+
+                    </div>
+
+
+                    <div class="gallery-product">
+
+                        <div class="gallery-item">
+
+                            <img
+                                src="./images/G I Bracket-9.png"
+                                alt="GI Bracket"
+                                loading="lazy"
+                                decoding="async">
+
+                        </div>
+
+                        <p>
+                            GI Bracket
+                        </p>
+
+                    </div>
+
+
+                    <div class="gallery-product">
+
+                        <div class="gallery-item">
+
+                            <img
+                                src="./images/EndDrop-9.png"
+                                alt="End Drop"
+                                loading="lazy"
+                                decoding="async">
+
+                        </div>
+
+                        <p>
+                            End Drop
+                        </p>
+
+                    </div>
+
+
+                    <div class="gallery-product">
+
+                        <div class="gallery-item">
+
+                            <img
+                                src="./images/End Cap-9.png"
+                                alt="End Cap"
+                                loading="lazy"
+                                decoding="async">
+
+                        </div>
+
+                        <p>
+                            End Cap
+                        </p>
+
+                    </div>
+
+
+                    <div class="gallery-product">
+
+                        <div class="gallery-item">
+
+                            <img
+                                src="./images/Elbow Joint Corner Joint-9.png"
+                                alt="Elbow Joint Corner Joint"
+                                loading="lazy"
+                                decoding="async">
+
+                        </div>
+
+                        <p>
+                            Elbow Joint Corner Joint
+                        </p>
+
+                    </div>
+
+
+                    <div class="gallery-product">
+
+                        <div class="gallery-item">
+
+                            <img
+                                src="./images/Elbow Drop Corner Drop-9.png"
+                                alt="Elbow Drop Corner Drop"
+                                loading="lazy"
+                                decoding="async">
+
+                        </div>
+
+                        <p>
+                            Elbow Drop Corner Drop
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT -->
+
+                <button
+                    class="scroll-btn right"
+                    id="galleryRight"
+                    aria-label="Next products">
+
+                    &#10095;
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         CONTACT
+    ====================================================== -->
+
+    <section class="contact-section">
+
+        <div class="contact-container">
+
+
+            <div class="contact-left">
+
+                <h5>
+                    GET IN TOUCH
+                </h5>
+
+                <h2>
+                    Need a Rain Water Gutter Solution?
+                </h2>
+
+                <p>
+                    Whether you're building a new home or replacing an old
+                    gutter system, our experts are ready to help. Contact us
+                    today for a free consultation and quotation.
+                </p>
+
+
+                <div class="contact-info">
+
+                    <div class="info-box">
+
+                        <img
+                            src="./images/phone-call.png"
+                            alt="Phone"
+                            loading="lazy">
+
+                        <div>
+
+                            <h4>
+                                Phone
+                            </h4>
+
+                            <p>
+                                +91 98765 43210
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <img
+                            src="./images/mail.png"
+                            alt="Email"
+                            loading="lazy">
+
+                        <div>
+
+                            <h4>
+                                Email
+                            </h4>
+
+                            <p>
+                                info@starsupreme.com
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <img
+                            src="./images/location.png"
+                            alt="Location"
+                            loading="lazy">
+
+                        <div>
+
+                            <h4>
+                                Address
+                            </h4>
+
+                            <p>
+                                Kothamangalam, Kerala, India
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-right">
+
+                <form>
+
+                    <input
+                        type="text"
+                        placeholder="Your Name"
+                        required>
+
+                    <input
+                        type="email"
+                        placeholder="Email Address"
+                        required>
+
+                    <input
+                        type="tel"
+                        placeholder="Phone Number">
+
+                    <textarea
+                        rows="6"
+                        placeholder="Your Message"></textarea>
+
+                    <button type="submit">
+                        Send Message
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        const menuToggle =
+            document.getElementById("menuToggle");
+
+        const mobileMenu =
+            document.getElementById("mobileMenu");
+
+        const productDropdown =
+            document.getElementById("productDropdown");
+
+        const productButton =
+            document.getElementById("productButton");
+
+
+        /* MOBILE MENU */
+
+        menuToggle.addEventListener("click", function () {
+
+            const isOpen =
+                mobileMenu.classList.toggle("active");
+
+            menuToggle.classList.toggle("active");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                isOpen
+            );
+
+        });
+
+
+        /* MOBILE PRODUCT DROPDOWN */
+
+        productButton.addEventListener("click", function (event) {
+
+            if (window.innerWidth <= 767) {
+
+                event.preventDefault();
+
+                productDropdown.classList.toggle("open");
+
+            }
+
+        });
+
+
+        /* CLOSE MENU AFTER LINK CLICK */
+
+        document
+            .querySelectorAll(".nav-links > a")
+            .forEach(function (link) {
+
+                link.addEventListener("click", function () {
+
+                    if (window.innerWidth <= 767) {
+
+                        mobileMenu.classList.remove("active");
+
+                        menuToggle.classList.remove("active");
+
+                        menuToggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+
+                });
+
+            });
+
+
+        /* CLOSE MENU ON DESKTOP */
+
+        window.addEventListener("resize", function () {
+
+            if (window.innerWidth > 767) {
+
+                mobileMenu.classList.remove("active");
+
+                menuToggle.classList.remove("active");
+
+                productDropdown.classList.remove("open");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        });
+
+
+        /* GALLERY SCROLL */
+
+        const gallery =
+            document.getElementById("gallery");
+
+        const leftButton =
+            document.getElementById("galleryLeft");
+
+        const rightButton =
+            document.getElementById("galleryRight");
+
+
+        leftButton.addEventListener("click", function () {
+
+            gallery.scrollBy({
+
+                left: -300,
+
+                behavior: "smooth"
+
+            });
+
+        });
+
+
+        rightButton.addEventListener("click", function () {
+
+            gallery.scrollBy({
+
+                left: 300,
+
+                behavior: "smooth"
+
+            });
+
+        });
+
+
+        /* TOUCH / MOUSE DRAG */
+
+        let isDown = false;
+
+        let startX;
+
+        let scrollLeft;
+
+
+        gallery.addEventListener("mousedown", function (e) {
+
+            isDown = true;
+
+            gallery.style.cursor = "grabbing";
+
+            startX = e.pageX - gallery.offsetLeft;
+
+            scrollLeft = gallery.scrollLeft;
+
+        });
+
+
+        gallery.addEventListener("mouseleave", function () {
+
+            isDown = false;
+
+            gallery.style.cursor = "grab";
+
+        });
+
+
+        gallery.addEventListener("mouseup", function () {
+
+            isDown = false;
+
+            gallery.style.cursor = "grab";
+
+        });
+
+
+        gallery.addEventListener("mousemove", function (e) {
+
+            if (!isDown) return;
+
+            e.preventDefault();
+
+            const x =
+                e.pageX - gallery.offsetLeft;
+
+            const walk =
+                (x - startX) * 1.5;
+
+            gallery.scrollLeft =
+                scrollLeft - walk;
+
+        });
+
+    </script>
+
+</body>
+
+</html>
